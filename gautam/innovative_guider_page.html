@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Innovative Guider Page</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Global Styles */
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  background: #121212;
+  color: #f0f0f0;
+}
+
+/* Dynamic Background Animation */
+.background-animation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, #1e1e1e, #0d0d0d);
+  background-size: 400% 400%;
+  animation: gradient-animation 20s ease infinite;
+  z-index: -1;
+}
+
+@keyframes gradient-animation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Header Section */
+header {
+  height: 80vh; /* Increased height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  background-image: url(gg.webp);
+  background-size: cover;
+  background-position: center;
+}
+
+
+.header-content {
+  z-index: 1;
+  text-align: center;
+  backdrop-filter: blur(8px);
+  background-color: rgba(0, 0, 0, 0.5); /* Adds transparency to make text readable */
+  padding: 20px;
+}
+
+
+header h1 {
+  font-size: 3.5rem;
+  margin-bottom: 10px;
+  background: linear-gradient(to right, #0f0f0f, #ff0080);
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: color-fade 6s infinite;
+}
+
+header p {
+  font-size: 1.3rem;
+  color: #e0e0e0;
+  margin: 0;
+}
+
+@keyframes color-fade {
+  0%, 100% { filter: hue-rotate(0deg); }
+  50% { filter: hue-rotate(360deg); }
+}
+
+/* Guide Cards */
+.guides-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 40px;
+  padding: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.guide-card {
+  perspective: 1000px;
+}
+
+.innovative-card {
+  position: relative;
+  width: 100%;
+  height: 350px;
+  transform-style: preserve-3d;
+  transition: transform 1s;
+  cursor: pointer;
+}
+
+.innovative-card .card-front,
+.innovative-card .card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+}
+
+.innovative-card .card-front {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease-out;
+}
+
+.innovative-card .card-back {
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  transform: rotateY(180deg);
+  padding: 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Flip Animation */
+.innovative-card:hover {
+  transform: rotateY(180deg);
+}
+
+/* Innovative Button Styles */
+.innovative-btn {
+  padding: 12px 20px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 25px;
+  background-color: #ff8c00;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s ease;
+}
+
+.innovative-btn:hover {
+  background-color: #ff0080;
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(255, 0, 150, 0.7);
+}
+
+/* Popup Modal Styles */
+.popup-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  z-index: 1000;
+}
+
+.popup-content {
+  background: #1e1e1e;
+  margin: 10% auto;
+  padding: 40px;
+  width: 80%;
+  max-width: 500px;
+  border-radius: 15px;
+  color: #ffffff;
+  text-align: center;
+  animation: popup-fade-in 0.7s ease-out;
+}
+
+@keyframes popup-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+
+  </style>
+</head>
+<body>
+  <header class="header-content">
+    
+      <h1 align="center">Discover Your Perfect Travel Guide</h1>
+      
+      
+    
+  </header>
+  <main>
+    <div class="filter-section">
+      <label for="filter-language">Filter by Language:</label>
+      <select id="filter-language">
+        <option value="all">All</option>
+        <option value="english">English</option>
+        <option value="spanish">Spanish</option>
+        <option value="french">French</option>
+      </select>
+    </div>
+
+    <div class="guides-container" id="guides-container">
+      <!-- Guide Card 1 -->
+      <div class="guide-card neumorphism" data-language="english">
+        <img src="guide1.jpg" alt="Guide Picture">
+        <h3>John Doe</h3>
+        <p>Languages: English, Spanish</p>
+        <p>Rating: ⭐⭐⭐⭐☆</p>
+        <p>Specializes in cultural and city tours.</p>
+        <div class="button-group">
+          <button class="choose-guide neumorphism-btn small-btn">Choose</button>
+          <button class="contact-guide neumorphism-btn small-btn">Contact</button>
+          <button class="view-profile neumorphism-btn small-btn" data-id="1">View Profile</button>
+        </div>
+      </div>
+
+      <!-- Guide Card 2 -->
+      <div class="guide-card neumorphism" data-language="spanish">
+        <img src="guide2.jpg" alt="Guide Picture">
+        <h3>Maria Gonzalez</h3>
+        <p>Languages: Spanish, English</p>
+        <p>Rating: ⭐⭐⭐⭐⭐</p>
+        <p>Specializes in historical tours.</p>
+        <div class="button-group">
+          <button class="choose-guide neumorphism-btn small-btn">Choose</button>
+          <button class="contact-guide neumorphism-btn small-btn">Contact</button>
+          <button class="view-profile neumorphism-btn small-btn" data-id="2">View Profile</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Popup Modal -->
+  <div class="popup-modal" id="popup-modal">
+    <div class="popup-content neumorphism">
+      <span class="close-btn" id="close-btn">&times;</span>
+      <div id="popup-info"></div>
+    </div>
+  </div>
+
+  <script>
+    // JavaScript to handle popup details
+document.querySelectorAll('.view-profile').forEach(button => {
+  button.addEventListener('click', () => {
+    const guideId = button.getAttribute('data-id');
+    showPopup(guideId);
+  });
+});
+
+document.getElementById('popup-modal').addEventListener('click', (e) => {
+  if (e.target === document.getElementById('popup-modal')) {
+    closePopup();
+  }
+});
+
+document.getElementById('close-btn').addEventListener('click', closePopup);
+
+function showPopup(id) {
+  const popupInfo = document.getElementById('popup-info');
+  if (id === '1') {
+    popupInfo.innerHTML = `
+      <img src="guide1.jpg" alt="John Doe">
+      <h2>John Doe</h2>
+      <p><strong>Languages:</strong> English, Spanish</p>
+      <p><strong>Rating:</strong> ⭐⭐⭐⭐☆</p>
+      <p><strong>Experience:</strong> 5 years specializing in cultural and city tours.</p>
+      <p><strong>Highlights:</strong> Excellent storytelling, knowledgeable about historical landmarks.</p>
+      <p><strong>Contact:</strong> john.doe@example.com</p>
+    `;
+  } else if (id === '2') {
+    popupInfo.innerHTML = `
+      <img src="guide2.jpg" alt="Maria Gonzalez">
+      <h2>Maria Gonzalez</h2>
+      <p><strong>Languages:</strong> Spanish, English</p>
+      <p><strong>Rating:</strong> ⭐⭐⭐⭐⭐</p>
+      <p><strong>Experience:</strong> 8 years specializing in historical tours and food experiences.</p>
+      <p><strong>Highlights:</strong> Great with family groups, deeply passionate about local culture.</p>
+      <p><strong>Contact:</strong> maria.gonzalez@example.com</p>
+    `;
+  }
+
+  document.getElementById('popup-modal').style.display = 'block';
+}
+
+function closePopup() {
+  document.getElementById('popup-modal').style.display = 'none';
+}
+</script>
+<script>
+    // Fetch data from localStorage
+    const guiders = JSON.parse(localStorage.getItem('guiders')) || [];
+
+    // Get the container
+    const guidesContainer = document.getElementById('guides-container');
+
+    // Render guider cards
+    guiders.forEach(guider => {
+        const guideCard = document.createElement('div');
+        guideCard.classList.add('guide-card', 'neumorphism');
+
+        guideCard.innerHTML = `
+            <img src="${guider.photoURL}" alt="${guider.fullName}">
+            <h3>${guider.fullName}</h3>
+            <p>Languages: ${guider.languages}</p>
+            <p>Rating: ⭐⭐⭐⭐☆</p>
+            <p>Specializes in ${guider.expertise}.</p>
+            <div class="button-group">
+                <button class="choose-guide neumorphism-btn small-btn">Choose</button>
+                <button class="contact-guide neumorphism-btn small-btn">Contact</button>
+                <button class="view-profile neumorphism-btn small-btn">View Profile</button>
+            </div>
+        `;
+
+        guidesContainer.appendChild(guideCard);
+    });
+</script>
+
+</body>
+</html>

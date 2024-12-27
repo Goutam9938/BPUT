@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tour Package</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>TOUR PACKAGE</h1>
+        <form class="ticket-form" action="second.html" method="get">
+            <div class="form-row">
+                <div class="input-group">
+                    <label for="from">From</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-location-arrow"></i>
+                        <input type="text" id="from" placeholder="Enter Origin" class="input-box" required>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label for="from-date">From Date</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-calendar-day"></i>
+                        <input type="date" id="from-date" class="input-box" required>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="input-group">
+                    <label for="to">To</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <input type="text" id="to" placeholder="Enter Destination" class="input-box" required>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label for="to-date">To Date</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-calendar-check"></i>
+                        <input type="date" id="to-date" class="input-box" required>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="input-group">
+                    <label for="class">Class</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-suitcase"></i>
+                        <select id="class" class="input-box" required>
+                            <option value="GENERAL">General</option>
+                            <option value="LADIES">Ladies</option>
+                            <option value="Two Person">Two Person</option>
+                            <option value="Three Person">Three Person</option>
+                            <option value="Person with disability">Person with disability</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <center>
+                <div class="button-container">
+                    <button type="submit" class="search-btn">Search
+                    </button>
+                    <button type="reset" class="reset-btn">Reset
+                    </button>
+                </div>
+            </center>
+            
+
+            <p style="text-align: center; color: blue;">Easily book your dream tour with our enhanced interface!</p>
+        </form>
+    </div>
+    <script src = 'script.js'></script>
+</body>
+
+</html>

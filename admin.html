@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - View Essential Services</title>
+</head>
+<body>
+
+<h1>Admin - View Essential Services</h1>
+
+<div id="serviceGallery"></div>
+
+<script>
+    const serviceGallery = document.getElementById('serviceGallery');
+    const channel = new BroadcastChannel('service_channel');
+
+    // Listen for new services from the user page
+    channel.onmessage = (event) => {
+        const { image, type, name, description, longitude, latitude } = event.data;
+
+        if (image && type && name && description && !isNaN(longitude) && !isNaN(latitude)) {
+            const serviceCard = document.createElement('div');
+            serviceCard.classList.add('service-card');
+
+            const img = document.createElement('img');
+            img.src = image;
+
+            const typeText = document.createElement('p');
+            typeText.textContent = Service Type: ${type};
+
+            const nameText = document.createElement('p');
+            nameText.textContent = Name: ${name};
+
+            const descriptionText = document.createElement('p');
+            descriptionText.textContent = Description: ${description};
+
+            const locationText = document.createElement('p');
+            locationText.textContent = Location: Latitude (${latitude}), Longitude (${longitude});
+
+            const approveButton = document.createElement('button');
+            approveButton.textContent = 'Approve';
+            approveButton.classList.add('btn-approve');
+            approveButton.onclick = () => handleApprove(name);
+
+            const rejectButton = document.createElement('button');
+            rejectButton.textContent = 'Reject';
+            rejectButton.classList.add('btn-reject');
+            rejectButton.onclick = () => handleReject(name);
+
+            serviceCard.appendChild(img);
+            serviceCard.appendChild(typeText);
+            serviceCard.appendChild(nameText);
+            serviceCard.appendChild(descriptionText);
+            serviceCard.appendChild(locationText);
+            serviceCard.appendChild(approveButton);
+            serviceCard.appendChild(rejectButton);
+
+            serviceGallery.appendChild(serviceCard);
+        }
+    };
+
+    function handleApprove(serviceName) {
+        alert(Service "${serviceName}" has been approved.);
+        
+        // Send reward cash to user via BroadcastChannel
+        channel.postMessage({ reward: 50 }); // Sends 50 cash points as a reward
+    }
+
+    function handleReject(serviceName) {
+        alert(Service "${serviceName}" has been rejected.);
+    }
+</script>
+
+<style>
+    .service-card {
+        border: 1px solid #333;
+        padding: 20px;
+        margin: 10px;
+        border-radius: 8px;
+        background-color: #f9f9f9;
+        text-align: center;
+    }
+
+    .btn-approve {
+        background-color: #28a745;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .btn-reject {
+        background-color: #dc3545;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+</style>
+
+</body>
+</html>

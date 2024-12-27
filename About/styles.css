@@ -1,0 +1,125 @@
+/* General Reset */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+header {
+  background: linear-gradient(90deg, #1c1c44, #1b8d83);
+}
+
+/* Navbar Styles */
+.navbar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.navbar ul li {
+  margin: 0 15px;
+}
+
+.navbar ul li a {
+  text-decoration: none;
+  color: white;
+  padding: 10px 20px;
+  display: block;
+  font-weight: bold;
+}
+
+.navbar ul li a:hover,
+.navbar ul li a.active {
+  background-color: lightblue;
+  border-radius: 5px;
+}
+
+/* Contact Banner Styles */
+.contact-banner {
+  background-color: lightgreen;
+  text-align: center;
+  padding: 0px 0;
+  color: navy;
+}
+
+.contact-banner h1 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.contact-banner p {
+  margin: 5px 0;
+}
+
+/* Image Gallery - Diagonal Design */
+.image-gallery {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.image-gallery img {
+  height: 200px; /* Adjust height */
+  object-fit: cover; /* Crop to fit */
+  clip-path: polygon(10% 0, 100% 0, 90% 100%, 0% 100%); /* Diagonal cut */
+  margin: 0 -10px; /* Reduce spacing between images */
+  transition: transform 0.3s ease; /* Smooth zoom effect */
+}
+
+/* Add hover effect for better interactivity */
+.image-gallery img:hover {
+  transform: scale(1.05); /* Slight zoom effect */
+  z-index: 1; /* Bring hovered image to the front */
+}
+
+/* Optional: Make images responsive for smaller screens */
+@media (max-width: 768px) {
+  .image-gallery img {
+    height: 150px; /* Adjust height for smaller screens */
+    clip-path: polygon(5% 0, 100% 0, 95% 100%, 0% 100%); /* Adjust diagonal cut */
+  }
+}
+
+/* Contact Section Layout */
+.contact-section {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.contact-info {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.contact-info h2 {
+  color: navy;
+}
+
+.map {
+  flex: 1;
+}
+
+/* Footer Styles */
+footer {
+  background: #0a1a2b;
+  padding: 10px 0;
+  text-align: center;
+}
+
+footer a {
+  color: #ffc107;
+  margin: 0 10px;
+}
+
+footer a:hover {
+  color: #fff;
+}
+
+footer p {
+  margin: 5px 0;
+  color: #fff;
+}

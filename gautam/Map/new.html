@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guider Registration</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            font-size: 2.5rem;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-top: 15px;
+            font-weight: bold;
+            color: #34495e;
+        }
+        input, select, textarea {
+            margin-top: 5px;
+            padding: 10px;
+            font-size: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        textarea {
+            resize: vertical;
+        }
+        button {
+            margin-top: 20px;
+            padding: 15px;
+            font-size: 1rem;
+            color: #ffffff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Guider Registration</h1>
+        <form action="/submit-guider-registration" method="POST" enctype="multipart/form-data">
+            <label for="full-name">Full Name:</label>
+            <input type="text" id="full-name" name="full-name" required>
+
+            <label for="email">Email Address:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="phone">Phone Number:</label>
+            <input type="tel" id="phone" name="phone" required>
+
+            <label for="address">Address:</label>
+            <textarea id="address" name="address" rows="3" required></textarea>
+
+            <label for="languages">Languages Spoken:</label>
+            <input type="text" id="languages" name="languages" placeholder="E.g., English, Hindi, Odia">
+
+            <label for="expertise">Areas of Expertise:</label>
+            <input type="text" id="expertise" name="expertise" placeholder="E.g., Historical tours, Adventure tours">
+
+            <label for="experience">Years of Experience:</label>
+            <input type="number" id="experience" name="experience" min="0" required>
+
+            <label for="id-proof">Upload ID Proof:</label>
+            <input type="file" id="id-proof" name="id-proof" accept="image/*,application/pdf" required>
+
+            <label for="photo">Upload Profile Photo:</label>
+            <input type="file" id="photo" name="photo" accept="image/*">
+
+            <label for="criminal-case">Do you have any ongoing or past criminal cases?</label>
+            <select id="criminal-case" name="criminal-case" required>
+                <option value="">Select</option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+
+            <label for="character-certificate">Upload Character Certificate:</label>
+            <input type="file" id="character-certificate" name="character-certificate" accept="image/*,application/pdf" required>
+
+            <label for="bank-details">Bank Account Details:</label>
+            <textarea id="bank-details" name="bank-details" rows="2" placeholder="E.g., Account Number, IFSC Code"></textarea>
+
+            <label for="availability">Availability (Dates/Times):</label>
+            <textarea id="availability" name="availability" rows="2"></textarea>
+
+            <label for="bio">Profile Description:</label>
+            <textarea id="bio" name="bio" rows="4" placeholder="Write a short bio about yourself."></textarea>
+
+            <label>
+                <input type="checkbox" name="terms" required>
+                I agree to the <a href="terms_and_conditions.html" target="_blank">terms and conditions</a>.
+            </label>
+
+            <form action="innovative_guider_page.html" method="get">
+                <button type="submit">Register</button>
+              </form>
+              
+        </form>
+    </div>
+    <script>
+    document.querySelector('form').addEventListener('submit', function (event) {
+        event.preventDefault(); // Prevent form submission
+
+        // Collect data
+        const fullName = document.getElementById('full-name').value;
+        const email = document.getElementById('email').value;
+        const phone = document.getElementById('phone').value;
+        const languages = document.getElementById('languages').value;
+        const expertise = document.getElementById('expertise').value;
+        const experience = document.getElementById('experience').value;
+        const photo = document.getElementById('photo').files[0];
+
+        // Convert photo to a URL for preview
+        const photoURL = photo ? URL.createObjectURL(photo) : 'default-profile.jpg';
+
+        // Create a guider object
+        const guider = { fullName, email, phone, languages, expertise, experience, photoURL };
+
+        // Save guider to localStorage
+        const guiders = JSON.parse(localStorage.getItem('guiders')) || [];
+        guiders.push(guider);
+        localStorage.setItem('guiders', JSON.stringify(guiders));
+
+        alert('Registration successful! The guide will be added to the main page.');
+
+        
+    });
+</script>
+
+</body>
+</html>

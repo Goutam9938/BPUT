@@ -1,0 +1,150 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    height: 50px;
+    background: #f8f8f8;
+}
+
+header .logo {
+    display: flex;
+    align-items: center;
+}
+
+header .logo img {
+    height: 40px;
+    margin-right: 10px;
+}
+
+header .rewards button {
+    background: purple;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.package-overview {
+    display: flex;
+    padding: 20px;
+    border-bottom: 1px solid #ccc;
+}
+
+.package-overview .image img {
+    width: 300px;
+    border-radius: 5px;
+}
+
+.package-overview .details {
+    margin-left: 20px;
+}
+
+.package-overview .details h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.package-overview .details .inclusions span {
+    margin-right: 10px;
+}
+
+.package-overview .details .price {
+    color: green;
+    font-weight: bold;
+}
+
+.package-overview .book-now {
+    background: #ff9800;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.content-wrapper {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.package-tabs {
+    width: 70%;
+}
+
+.package-tabs nav {
+    display: flex;
+    gap: 20px;
+}
+
+.package-tabs nav button {
+    background: #f1f1f1;
+    border: 1px solid #ccc;
+    padding: 10px 15px;
+    cursor: pointer;
+    text-align: center;
+    flex-grow: 1;
+}
+
+.package-tabs nav button.active {
+    background: #ff9800;
+    color: white;
+}
+
+.package-tabs .tab-content table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.package-tabs .tab-content table th,
+.package-tabs .tab-content table td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+}
+
+.query-form {
+    padding: 20px;
+    background: #f8f8f8;
+    border-left: 1px solid #ccc;
+    border: 2px solid #ddd; 
+    max-width: 600px;
+    width: 35%; 
+    margin-left: 10px;
+  }
+  
+
+.query-form h3 {
+    margin-bottom: 10px;
+}
+
+.query-form form input,
+.query-form form textarea,
+.query-form form button {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.query-form form button {
+    background: #ff9800;
+    color: white;
+    cursor: pointer;
+    width: 103%;
+}
+.tab-content {
+    border: 1px solid #ccc;
+    padding: 10px;
+    background: #fff;
+  }

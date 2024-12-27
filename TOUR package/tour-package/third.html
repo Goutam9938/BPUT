@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Travel Package</title>
+  <link rel="stylesheet" href="third.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"/>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <h1>Tour Package</h1>
+    </div>
+    <div class="rewards">
+      <button>Earn Rewards</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="package-overview">
+      <div class="image">
+        <img src="waterfall.png" alt="Waterfall">
+      </div>
+      <div class="details">
+        <h2>Essence of Northeast Group Package Ex-Rajgiri Waterfall</h2>
+        <p><i class="fa-solid fa-clock"></i> 6 Nights/7 Days</p>
+        <p><i class="fa-solid fa-location-dot"></i> Places: Rajgiri Waterfall, Bodhgaya, Bhubaneswar, Puri, Konark Temple</p>
+        <div class="inclusions">
+          <span>Inclusions:</span>
+          <span><i class="fa-solid fa-bus"></i> Bus</span>
+          <span><i class="fa-solid fa-hotel"></i> Hotel</span>
+          <span><i class="fa-solid fa-bowl-food"></i> Meal</span>
+          <span><i class="fa-solid fa-person-breastfeeding"></i> Guide/Escort</span>
+        </div>
+        <p class="price">Starting from<br/> ₹6000</p>
+        <button class="book-now">Book Now</button>
+      </div>
+    </section>
+
+    <div class="content-wrapper">
+      <section class="package-tabs">
+        <nav>
+          <button class="active" onclick="showTab('overview')">Overview</button>
+          <button onclick="showTab('itinerary')">Itinerary</button>
+          <button onclick="showTab('inclusion')">Inclusion</button>
+          <button onclick="showTab('terms')">Terms & Conditions</button>
+          <button onclick="showTab('contact')">Contact Us</button>
+        </nav>
+        <div class="tab-content">
+          <div id="overview" class="tab-pane">
+            <p><table>
+              <tr>
+                <th colspan="2" style="text-align: right;"><a href="#">Download package Details</th>
+              </tr>
+              <tr>
+                <th colspan="2"><center>Package Details</center></th>
+              </tr>
+              <tr>
+                <th>Package Name</th>
+                <td>Essence of Northeast Group Package Ex-Guwahati</td>
+              </tr>
+              <tr>
+                <th>Places Covered</th>
+                <td>RajgiriWaterfall, Bodhgaya , Bhubaneswar , Puri,Konark Temple...</td>
+              </tr>
+              <tr>
+                <th>Duration</th>
+                <td>06 Nights / 07 Days</td>
+              </tr>
+              <tr>
+                <th>Meal Plan</th>
+                <td>Breakfast & Dinner (MAP)</td>
+              </tr>
+            </table></p>
+          </div>
+          <div id="itinerary" class="tab-pane" style="display: none;">
+            <p><table>
+              <tr>
+                <th colspan="2" style="text-align: right;"><a href="#">Download Itinerary</a></th>
+              </tr>
+              <tr>
+                <th colspan="2"><center>Itinerary Details</center></th>
+              </tr>
+              <tr>
+                <th>Day 1</th>
+                <td>Arrival at Guwahati, transfer to hotel, evening leisure.</td>
+              </tr>
+              <tr>
+                <th>Day 2</th>
+                <td>Visit Kamakhya Temple and local sightseeing in Guwahati.</td>
+              </tr>
+              <tr>
+                <th>Day 3</th>
+                <td>Travel to Shillong, explore Umiam Lake and local attractions.</td>
+              </tr>
+              <tr>
+                <th>Day 4</th>
+                <td>Excursion to Cherrapunji, visit Nohkalikai Falls and Mawsmai Cave.</td>
+              </tr>
+              <tr>
+                <th>Day 5</th>
+                <td>Visit Mawlynnong, Dawki River, and return to Shillong.</td>
+              </tr>
+              <tr>
+                <th>Day 6</th>
+                <td>Return to Guwahati, Brahmaputra River Cruise (optional).</td>
+              </tr>
+              <tr>
+                <th>Day 7</th>
+                <td>Departure from Guwahati.</td>
+              </tr>
+            </table>
+            </p>
+          </div>
+          <div id="inclusion" class="tab-pane" style="display: none;">
+            <p><table>
+              <tr>
+                <th colspan="2"><center>Package Inclusions</center></th>
+              </tr>
+              <tr>
+                <th>Transport</th>
+                <td>Comfortable AC Bus/Car for transfers and sightseeing.</td>
+              </tr>
+              <tr>
+                <th>Accommodation</th>
+                <td>Well-appointed rooms in 3-star hotels.</td>
+              </tr>
+              <tr>
+                <th>Meals</th>
+                <td>Breakfast & Dinner as per the itinerary.</td>
+              </tr>
+              <tr>
+                <th>Guide</th>
+                <td>Experienced tour escort for the entire trip.</td>
+              </tr>
+              <tr>
+                <th>Tickets</th>
+                <td>Entry fees for all monuments and attractions.</td>
+              </tr>
+            </table>
+            </p>
+          </div>
+          <div id="terms" class="tab-pane" style="display: none;">
+            <p><div>
+              <h3>Terms & Conditions</h3>
+              <ul>
+                <li>Prices are subject to change without prior notice.</li>
+                <li>Booking is confirmed only after full payment.</li>
+                <li>Cancellation charges apply as per company policy.</li>
+                <li>Accommodation is subject to availability at the time of booking.</li>
+                <li>Travel insurance is not included but can be availed separately.</li>
+                <li>The company will not be responsible for natural calamities or delays due to unforeseen circumstances.</li>
+              </ul>
+            </div>
+            </p>
+          </div>
+          <div id="contact" class="tab-pane" style="display: none;">
+            <p><div>
+              <h3>Contact Us</h3>
+              <p><strong>Phone:</strong> +91-9876543210</p>
+              <p><strong>Email:</strong> info@travelagency.com</p>
+              <p><strong>Address:</strong> 123, Travel Street, Guwahati, Assam, India</p>
+              <p><strong>Working Hours:</strong> Monday to Saturday, 9:00 AM to 6:00 PM</p>
+              <p>Feel free to reach out for any queries or assistance.</p>
+            </div>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <aside class="query-form">
+        <h3>Submit Your Query For Call Back</h3>
+        <form>
+          <input type="text" id="name" name="name" placeholder="Name" required>
+          <input type="email" id="email" name="email" placeholder="Email" required>
+          <input type="tel" id="phone" name="phone" placeholder="Phone" required>
+          <input type="text" id="place" name="place" placeholder="Place Of Origin" required>
+          <textarea id="query" name="query" rows="4" placeholder="Type Your Query" required></textarea>
+          <button type="submit">Submit</button>
+        </form>
+      </aside>
+    </div>
+  </main>
+
+  <script>
+    function showTab(tabId) {
+      const tabs = document.querySelectorAll('.tab-pane');
+      const buttons = document.querySelectorAll('nav button');
+
+      tabs.forEach(tab => tab.style.display = 'none');
+      buttons.forEach(button => button.classList.remove('active'));
+
+      document.getElementById(tabId).style.display = 'block';
+      document.querySelector(`nav button[onclick="showTab('${tabId}')"]`).classList.add('active');
+    }
+  </script>
+</body>
+</html>

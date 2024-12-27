@@ -1,0 +1,138 @@
+/* Navbar Styles */
+.navbar {
+    background-color: #333;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-left {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-brand {
+    font-size: 24px;
+    color: white;
+    margin-left: 10px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.navbar-left .logo {
+    width: 40px;
+    height: 40px;
+}
+
+.navbar-right {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-link {
+    color: white;
+    margin-left: 20px;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.navbar-link:hover {
+    text-decoration: underline;
+}
+
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    background-image: url("https://www.irctcbuddhisttrain.com/buddhist-tour-packages-price-in-india/img/1stsection.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.container {
+    width: 80%;
+    margin: 20px auto;
+    background-color: transparent; /* Full transparency */
+    padding: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Subtle shadow effect */
+    border-radius: 10px;
+}
+
+h1 {
+    text-align: center;
+    font-size: 36px; /* Increased font size for better visibility */
+}
+
+.profile {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.progress-section {
+    margin-top: 20px;
+}
+
+.progress-bar-container {
+    width: 100%;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.progress-bar {
+    width: 0%;
+    height: 25px;
+    background-color: green;
+    border-radius: 5px;
+    transition: width 0.3s ease-in-out;
+}
+
+.actions button {
+    width: 200px;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    margin: 10px;
+    border-radius: 5px;
+}
+
+.actions button:hover {
+    background-color: #45a049;
+}
+
+.reward-section {
+    display: none;
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    margin-top: 20px;
+    border-radius: 5px;
+}
+
+.history ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.history li {
+    background-color: #f9f9f9;
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+#first-time-reward-section {
+    background-color: #FF9800;
+    display: none;
+    color: white;
+    padding: 10px;
+    margin-top: 20px;
+    border-radius: 5px;
+}

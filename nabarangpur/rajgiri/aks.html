@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Reviews</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Base Styles */
+   
+
+        .review-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 1rem;
+            background-color: #fff;
+            border-radius: 2px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .review-header h2 {
+            margin: 0;
+        }
+
+        .review-header button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .review-header button:hover {
+            background-color: #0056b3;
+        }
+
+        .review-list {
+            margin-top: 1rem;
+        }
+
+        .review-item {
+            position: relative;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .review-item h3 {
+            margin: 0;
+            font-size: 1.2rem;
+        }
+
+        .review-item p {
+            margin: 0.5rem 0;
+        }
+
+        .review-item span {
+            color: #ffaa00;
+        }
+
+        .review-item img, .review-item video {
+            max-width: 200px;
+            max-height: 150px;
+            margin-top: 0.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .review-item .date {
+            color: #888;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .three-dots {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+        }
+
+        .menu {
+            display: none;
+            position: absolute;
+            top: 30px;
+            right: 10px;
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+        }
+
+        .menu button {
+            background: none;
+            border: none;
+            padding: 0.5rem 1rem;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+        }
+
+        .menu button:hover {
+            background-color: #f0f0f0;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+            animation: slideDown 0.4s ease;
+        }
+
+        .modal-content input,
+        .modal-content textarea,
+        .modal-content select {
+            width: 100%;
+            margin-bottom: 1rem;
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .modal-content button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .modal-content button:hover {
+            background-color: #0056b3;
+        }
+
+        .full-screen-modal img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="review-container">
+        <div class="review-header">
+            <h2>Reviews</h2>
+            <button id="addReviewBtn">Add Review</button>
+        </div>
+        <div class="review-list" id="reviewList"></div>
+        <button id="toggleReviewsBtn" style="display: none;">Show More</button>
+    </div>
+
+    <!-- Modal for Add/Edit Review -->
+    <div class="modal" id="reviewModal">
+        <div class="modal-content">
+            <h3>Add/Edit Review</h3>
+            <input type="text" id="reviewerName" placeholder="Your Name">
+            <select id="reviewRating">
+                <option value="" disabled selected>Rating</option>
+                <option value="1">1 ⭐</option>
+                <option value="2">2 ⭐⭐</option>
+                <option value="3">3 ⭐⭐⭐</option>
+                <option value="4">4 ⭐⭐⭐⭐</option>
+                <option value="5">5 ⭐⭐⭐⭐⭐</option>
+            </select>
+            <textarea id="reviewText" rows="3" placeholder="Your Review"></textarea>
+            <input type="file" id="reviewImage" accept="image/*">
+            <input type="file" id="reviewVideo" accept="video/*">
+            <button id="saveReviewBtn">Save Review</button>
+        </div>
+    </div>
+
+    <!-- Full-Screen Modal for Images -->
+    <div class="modal full-screen-modal" id="fullScreenModal">
+        <div class="modal-content">
+            <img id="fullScreenImage" src="" alt="Full-Screen Image">
+        </div>
+    </div>
+
+    <script>
+        const reviewsPerPage = 4;
+        let showingAllReviews = false;
+        const reviews = JSON.parse(localStorage.getItem('reviews')) || [];
+
+        const reviewList = document.getElementById('reviewList');
+        const toggleReviewsBtn = document.getElementById('toggleReviewsBtn');
+        const reviewModal = document.getElementById('reviewModal');
+        const reviewerName = document.getElementById('reviewerName');
+        const reviewRating = document.getElementById('reviewRating');
+        const reviewText = document.getElementById('reviewText');
+        const reviewImage = document.getElementById('reviewImage');
+        const reviewVideo = document.getElementById('reviewVideo');
+        const saveReviewBtn = document.getElementById('saveReviewBtn');
+
+        const fullScreenModal = document.getElementById('fullScreenModal');
+        const fullScreenImage = document.getElementById('fullScreenImage');
+
+        const renderReviews = () => {
+            reviewList.innerHTML = '';
+            const reviewsToShow = showingAllReviews ? reviews : reviews.slice(0, reviewsPerPage);
+            reviewsToShow.forEach((review, index) => {
+                const div = document.createElement('div');
+                div.classList.add('review-item');
+                div.innerHTML = `
+                    <h3>${review.name}</h3>
+                    <p>${'⭐'.repeat(review.rating)}</p>
+                    <p>${review.text}</p>
+                    ${review.image ? `<img src="${review.image}" alt="Review Image" onclick="openFullScreen('${review.image}')">` : ''}
+                    ${review.video ? `<video controls src="${review.video}"></video>` : ''}
+                    <p class="date">${review.date}</p>
+                    <div class="three-dots" onclick="toggleMenu(event, ${index})">...</div>
+                    <div class="menu" id="menu-${index}">
+                        <button onclick="editReview(${index})">Edit</button>
+                        <button onclick="deleteReview(${index})">Delete</button>
+                    </div>
+                `;
+                reviewList.appendChild(div);
+            });
+
+            toggleReviewsBtn.style.display = reviews.length > reviewsPerPage ? 'block' : 'none';
+        };
+
+        const toggleMenu = (event, index) => {
+            event.stopPropagation();
+            const menu = document.getElementById(`menu-${index}`);
+            menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+        };
+
+        const editReview = (index) => {
+            const review = reviews[index];
+            reviewerName.value = review.name;
+            reviewRating.value = review.rating;
+            reviewText.value = review.text;
+            reviewImage.value = '';
+            reviewVideo.value = '';
+            saveReviewBtn.onclick = () => {
+                review.name = reviewerName.value.trim();
+                review.rating = parseInt(reviewRating.value);
+                review.text = reviewText.value.trim();
+                review.image = reviewImage.files[0] ? URL.createObjectURL(reviewImage.files[0]) : review.image;
+                review.video = reviewVideo.files[0] ? URL.createObjectURL(reviewVideo.files[0]) : review.video;
+                review.date = new Date().toLocaleDateString();
+                saveReviews();
+            };
+            reviewModal.style.display = 'flex';
+        };
+
+        const deleteReview = (index) => {
+            reviews.splice(index, 1);
+            saveReviews();
+        };
+
+        const addReview = () => {
+            const name = reviewerName.value.trim();
+            const rating = parseInt(reviewRating.value);
+            const text = reviewText.value.trim();
+            const image = reviewImage.files[0] ? URL.createObjectURL(reviewImage.files[0]) : null;
+            const video = reviewVideo.files[0] ? URL.createObjectURL(reviewVideo.files[0]) : null;
+            const date = new Date().toLocaleDateString();
+            reviews.push({ name, rating, text, image, video, date });
+            saveReviews();
+        };
+
+        const saveReviews = () => {
+            localStorage.setItem('reviews', JSON.stringify(reviews));
+            renderReviews();
+            reviewModal.style.display = 'none';
+        };
+
+        const toggleReviewView = () => {
+            showingAllReviews = !showingAllReviews;
+            renderReviews();
+        };
+
+        const openFullScreen = (imageSrc) => {
+            fullScreenImage.src = imageSrc;
+            fullScreenModal.style.display = 'flex';
+        };
+
+        fullScreenModal.onclick = () => {
+            fullScreenModal.style.display = 'none';
+        };
+
+        document.getElementById('addReviewBtn').onclick = () => {
+            reviewerName.value = '';
+            reviewRating.value = '';
+            reviewText.value = '';
+            reviewImage.value = '';
+            reviewVideo.value = '';
+            saveReviewBtn.onclick = addReview;
+            reviewModal.style.display = 'flex';
+        };
+
+        toggleReviewsBtn.onclick = toggleReviewView;
+        reviewModal.onclick = (e) => e.target === reviewModal ? (reviewModal.style.display = 'none') : null;
+
+        renderReviews();
+    </script>
+</body>
+</html>

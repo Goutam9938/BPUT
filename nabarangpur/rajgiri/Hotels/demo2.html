@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <title>Hotel Booking</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        .hero {
+            position: relative;
+            height: 60vh;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        .hero video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+        }
+        .search-form {
+            margin-top: -50px;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            z-index: 1;
+        }
+        .navbar {
+            background-color:  rgba(34, 90, 110, 0.902);
+        }
+        .navbar-brand, .nav-link {
+            color: white !important;
+        }
+        .navbar-brand:hover, .nav-link:hover {
+            color: #ffcc00 !important;
+        }
+        .navbar.sticky-top {
+            position: sticky;
+            top: 0;
+            z-index: 1020;
+        }
+          /* Dropdown filter styling */
+          .dropdown-menu {
+            position: absolute;
+            display: none;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            width: 250px;
+            top: 100%;
+            left: 0;
+            padding: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+        .nav-item:hover .dropdown-menu {
+            display: block;
+        }
+        .navbar-toggler {
+        border: none;
+        padding: 0.25rem 0.75rem;
+    }
+    .navbar-toggler-icon {
+        background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"%3E%3Cpath stroke="white" stroke-width="2" d="M5 7h20M5 15h20M5 23h20"%3E%3C/path%3E%3C/svg%3E');
+    }
+    .card {
+    margin-bottom: 20px;
+    flex: 1 0 auto; /* Ensures the cards stretch evenly */
+    height: 400px; /* Fixed height for cards */
+    overflow: hidden; /* Ensures content doesn't overflow */
+    transition: transform 0.3s; /* Smooth scaling effect */
+}
+
+.card:hover {
+    transform: scale(1.05); /* Slightly scale the card on hover */
+}
+
+.card-img-top {
+    height: 200px; /* Fixed height for images */
+    object-fit: cover; /* Ensures the image covers the area without distortion */
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Ensures space between elements */
+}
+
+.card-title {
+    font-size: 1.25rem; /* Larger title font */
+    font-weight: 700;
+}
+
+.card-text {
+    flex-grow: 1; /* Makes the text area flexible */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .card {
+        height: auto; /* Allow cards to adjust height on smaller screens */
+    }
+    .card-img-top {
+        height: 150px; /* Smaller image height on mobile */
+    }
+}
+        footer {
+            background: #0a1a2b;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        footer a {
+            color: #ffc107;
+            margin: 0 10px;
+        }
+
+        footer a:hover {
+            color: #fff;
+        }
+
+        footer p {
+            margin: 10px 0;
+            color: #fff;
+        }
+        .carousel .card {
+            border: none;
+        }
+        .carousel .card img {
+            height: 200px;
+            object-fit: cover;
+        }
+        .carousel .card-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+        }
+        #seeMoreBtn {
+    transition: background-color 0.3s;
+}
+
+#seeMoreBtn:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+    color: white;
+}
+        @media (max-width: 768px) {
+            .search-form {
+                margin-top: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <a class="navbar-brand" href="#">Hotel Booking</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Services</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contact</a>
+                </li>
+                <!-- Price Filter Dropdown -->
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <i class="fas fa-filter"></i> Price Range
+                    </a>
+                    <div class="dropdown-menu">
+                        <form id="priceFilterForm" class="px-2 py-3">
+                            <div class="form-group">
+                                <label for="minPrice">Min Price</label>
+                                <input type="number" id="minPrice" class="form-control" placeholder="Min Price">
+                            </div>
+                            <div class="form-group">
+                                <label for="maxPrice">Max Price</label>
+                                <input type="number" id="maxPrice" class="form-control" placeholder="Max Price">
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">Filter</button>
+                        </form>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    
+
+    <div class="hero">
+        <video autoplay muted loop>
+            <source src="backgroun vedio.mp4" type="video/mp4"> <!-- Replace with your video URL -->
+            Your browser does not support the video tag.
+        </video>
+        <div class="hero-overlay"></div>
+        <h1>Book Your Stay</h1>
+        <div class="search-form">
+            <form>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="checkIn">Check-in</label>
+                        <input type="date" class="form-control" id="checkIn" required>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="checkOut">Check-out</label>
+                        <input type="date" class="form-control" id="checkOut" required>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="guests">Guests</label>
+                        <select id="guests" class="form-control">
+                            <option selected>Choose...</option>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Search</button>
+            </form>
+        </div>
+    </div>
+    <div class="container mt-5">
+        <h2>Available Hotels</h2>
+        <div class="row" id="hotelCardsContainer">
+            <!-- Card 1 -->
+            <div class="col-md-4 col-sm-6 col-12 d-flex align-items-stretch hotel-card">
+                <div class="card">
+                    <img src="hotel4.jpg" class="card-img-top" alt="Hotel Image">
+                    <div class="card-body">
+                        <h5 class="card-title">Hotel Name</h5>
+                        <p class="card-text">Description of the hotel.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <a href="perticar.html" class="btn btn-primary">Book Now</a>
+                            <a href="https://www.google.com/maps?q=Hotel+Location" target="_blank" class="text-primary">
+                                <i class="fas fa-map-marker-alt"></i> Location
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6 col-12 d-flex align-items-stretch hotel-card">
+                <div class="card">
+                    <img src="hotel1.jpg" class="card-img-top" alt="Hotel Image">
+                    <div class="card-body">
+                        <h5 class="card-title">Hotel Name</h5>
+                        <p class="card-text">Description of the hotel.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <a href="index.html" class="btn btn-primary">Book Now</a>
+                            <a href="https://www.google.com/maps?q=Hotel+Location" target="_blank" class="text-primary">
+                                <i class="fas fa-map-marker-alt"></i> Location
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6 col-12 d-flex align-items-stretch hotel-card">
+                <div class="card">
+                    <img src="hotel1.jpg" class="card-img-top" alt="Hotel Image">
+                    <div class="card-body">
+                        <h5 class="card-title">Hotel Name</h5>
+                        <p class="card-text">Description of the hotel.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <a href="#" class="btn btn-primary">Book Now</a>
+                            <a href="https://www.google.com/maps?q=Hotel+Location" target="_blank" class="text-primary">
+                                <i class="fas fa-map-marker-alt"></i> Location
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6 col-12 d-flex align-items-stretch hotel-card">
+                <div class="card">
+                    <img src="hotel4.jpg" class="card-img-top" alt="Hotel Image">
+                    <div class="card-body">
+                        <h5 class="card-title">Hotel Name</h5>
+                        <p class="card-text">Description of the hotel.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <a href="#" class="btn btn-primary">Book Now</a>
+                            <a href="https://www.google.com/maps?q=Hotel+Location" target="_blank" class="text-primary">
+                                <i class="fas fa-map-marker-alt"></i> Location
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6 col-12 d-flex align-items-stretch hotel-card">
+                <div class="card">
+                    <img src="hotel4.jpg" class="card-img-top" alt="Hotel Image">
+                    <div class="card-body">
+                        <h5 class="card-title">Hotel Name</h5>
+                        <p class="card-text">Description of the hotel.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <a href="#" class="btn btn-primary">Book Now</a>
+                            <a href="https://www.google.com/maps?q=Hotel+Location" target="_blank" class="text-primary">
+                                <i class="fas fa-map-marker-alt"></i> Location
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6 col-12 d-flex align-items-stretch hotel-card">
+                <div class="card">
+                    <img src="hotel4.jpg" class="card-img-top" alt="Hotel Image">
+                    <div class="card-body">
+                        <h5 class="card-title">Hotel Name</h5>
+                        <p class="card-text">Description of the hotel.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <a href="#" class="btn btn-primary">Book Now</a>
+                            <a href="https://www.google.com/maps?q=Hotel+Location" target="_blank" class="text-primary">
+                                <i class="fas fa-map-marker-alt"></i> Location
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Repeat for other cards, total of 6 shown initially -->
+            
+            <!-- Hidden cards -->
+            <div class="col-md-4 col-sm-6 col-12 d-flex align-items-stretch hotel-card" style="display: none;">
+                <div class="card">
+                    <img src="hotel-image-url.jpg" class="card-img-top" alt="Hotel Image">
+                    <div class="card-body">
+                        <h5 class="card-title">Hotel Name</h5>
+                        <p class="card-text">Description of the hotel.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <a href="#" class="btn btn-primary">Book Now</a>
+                            <a href="https://www.google.com/maps?q=Hotel+Location" target="_blank" class="text-primary">
+                                <i class="fas fa-map-marker-alt"></i> Location
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Add more hidden cards as needed -->
+        </div>
+    
+        <!-- See More Button -->
+        <div class="text-center mt-4">
+            <button id="seeMoreBtn" class="btn btn-secondary">
+                See More <i class="fas fa-arrow-down"></i>
+            </button>
+        </div>
+    </div>
+  <div class="container mt-5">
+    <h2 class="text-center">Find Hotels by District</h2>
+    <div id="district-carousel" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <div class="row">
+                    <div class="col-md-4 col-sm-6">
+                        <div class="card">
+                            <img src="hotel1.jpg" class="card-img-top" alt="Cuttack">
+                            <div class="card-body">
+                                <h5 class="card-title">Cuttack</h5>
+                                <p class="card-text">Explore top hotels in Cuttack with the best amenities.</p>
+                                <a href="#" class="btn btn-primary">View Hotels</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <div class="card">
+                            <img src="swasti.jpg" class="card-img-top" alt="Puri">
+                            <div class="card-body">
+                                <h5 class="card-title">Puri</h5>
+                                <p class="card-text">Discover hotels near Puri's famous beaches and temples.</p>
+                                <a href="#" class="btn btn-primary">View Hotels</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <div class="card">
+                            <img src="lemon.jpg" class="card-img-top" alt="Bhubaneswar">
+                            <div class="card-body">
+                                <h5 class="card-title">Bhubaneswar</h5>
+                                <p class="card-text">Stay in the capital city with easy access to tourist spots.</p>
+                                <a href="Bhubaneswar.html" class="btn btn-primary">View Hotels</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="row">
+                    <div class="col-md-4 col-sm-6">
+                        <div class="card">
+                            <img src="district4.jpg" class="card-img-top" alt="Sambalpur">
+                            <div class="card-body">
+                                <h5 class="card-title">Sambalpur</h5>
+                                <p class="card-text">Find hotels close to nature and Sambalpur's scenic beauty.</p>
+                                <a href="#" class="btn btn-primary">View Hotels</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <div class="card">
+                            <img src="district5.jpg" class="card-img-top" alt="Balasore">
+                            <div class="card-body">
+                                <h5 class="card-title">Balasore</h5>
+                                <p class="card-text">Stay near the vibrant coastline and historic sites.</p>
+                                <a href="#" class="btn btn-primary">View Hotels</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <div class="card">
+                            <img src="district6.jpg" class="card-img-top" alt="Rourkela">
+                            <div class="card-body">
+                                <h5 class="card-title">Rourkela</h5>
+                                <p class="card-text">Book hotels in the city of steel and modern infrastructure.</p>
+                                <a href="#" class="btn btn-primary">View Hotels</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#district-carousel" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#district-carousel" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+</div>
+
+ 
+
+  <footer class="text-center mt-5">
+    <p>&copy; 2024 Unearthed Odisha | All rights reserved</p>
+    <div class="social-icons">
+        <a href="#" target="_blank"><i class="fab fa-facebook"></i></a>
+        <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+        <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="#" target="_blank"><i class="fab fa-youtube"></i></a>
+    </div>
+</footer>
+
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.4.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+
+
+    <!-- Add JavaScript for Price Filter -->
+    <script>
+        document.getElementById("priceFilterForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            let minPrice = document.getElementById("minPrice").value;
+            let maxPrice = document.getElementById("maxPrice").value;
+            
+            // Your logic for filtering hotels based on price range
+            console.log("Filtering hotels with price range: ", minPrice, maxPrice);
+        });
+    </script>
+     <script>
+        document.getElementById("seeMoreBtn").addEventListener("click", function() {
+            const hiddenCards = document.querySelectorAll(".hotel-card[style='display: none;']");
+            hiddenCards.forEach(card => {
+                card.style.display = "flex"; // Show the hidden cards
+            });
+            
+            // Hide the See More button after showing all cards
+            if (hiddenCards.length === 0) {
+                this.style.display = "none";
+            }
+        });
+    </script>
+    
+    
+
+
+</body>
+</html>

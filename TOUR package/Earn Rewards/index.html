@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unearthed Odisha - Rewards</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Navbar Section -->
+  <nav class="navbar">
+    <div class="navbar-left">
+      <img src="logo.png" alt="Unearthed Odisha Logo" class="logo">
+      <a href="#" class="navbar-brand">Unearthed Odisha</a>
+    </div>
+    <div class="navbar-right">
+      <a href="index.html" class="navbar-link">Home</a>
+      <a href="about.html" class="navbar-link">About</a>
+      <a href="contact.html" class="navbar-link">Contact</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h1>Unearthed Odisha - Rewards</h1>
+    <div class="profile">
+      <h3>Welcome, <span id="username">Sahil Kumar Lenka</span></h3>
+      <p>Total Points: <span id="total-points">0</span></p>
+    </div>
+
+    <div class="progress-section">
+      <h3>Your Progress:</h3>
+      <div class="progress-bar-container">
+        <div id="progress-bar" class="progress-bar"></div>
+      </div>
+      <p id="progress-text">Earn points to fill the bar and unlock a reward!</p>
+    </div>
+
+    <div class="actions">
+      <button id="checkin" onclick="earnPoints(10)">Check-in at a Spot (+10 points)</button>
+      <button id="buyCraft" onclick="earnPoints(20)">Buy Local Handcraft (+20 points)</button>
+    </div>
+
+    <div id="reward-section" class="reward-section">
+      <p>Congratulations! You earned enough points!</p>
+      <p>Enjoy a discount on your next trip or a free service! 🎉</p>
+    </div>
+
+    <!-- First-time login reward section -->
+    <div id="first-time-reward-section" class="reward-section">
+      <p>Welcome! You have earned 20 bonus points as a first-time reward! 🎉</p>
+    </div>
+
+    <div class="history">
+      <h3>Points History:</h3>
+      <ul id="history-list"></ul>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

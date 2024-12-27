@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unearthed Odisha - Hidden Spots by District</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        h1 {
+            margin-top: 20px;
+            color: #2c3e50;
+        }
+        .district-select {
+            margin: 20px 0;
+        }
+        select {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+        .detected-spot {
+            background-color: #2ecc71;
+            color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 20px 0;
+            width: 90%;
+            max-width: 400px;
+        }
+        .btn {
+            padding: 15px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            margin-top: 15px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .btn-upload {
+            background-color: #3498db;
+            color: #fff;
+        }
+        .btn-upload:hover {
+            background-color: #2980b9;
+        }
+        .uploaded-list {
+            margin-top: 30px;
+            width: 90%;
+            max-width: 600px;
+        }
+        .spot-card {
+            background-color: #ecf0f1;
+            border-left: 8px solid #2980b9;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .spot-image {
+            width: 100%;
+            height: auto;
+            max-height: 200px; /* You can adjust this value as needed */
+            object-fit: cover;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        .spot-info {
+            margin-top: 10px;
+        }
+        .spot-name {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .spot-history {
+            margin-bottom: 10px;
+        }
+        .spot-map {
+            width: 100%;
+            height: 200px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>🌐 Unearthed Odisha - Hidden Spots by District</h1>
+
+    <!-- Dropdown to select the district -->
+    <div class="district-select">
+        <h2>Select a District</h2>
+        <select id="district-select" onchange="detectNewSpot()">
+            <option value="Cuttack">Cuttack</option>
+            <option value="Khurda">Khurda</option>
+            <option value="Puri">Puri</option>
+            <option value="Ganjam">Ganjam</option>
+            <option value="Mayurbhanj">Mayurbhanj</option>
+        </select>
+    </div>
+
+    <!-- Display the detected hidden spot -->
+    <div class="detected-spot">
+        <h2>🔍 Detected Hidden Spot</h2>
+        <p id="detected-spot-name">Scanning for hidden spots...</p>
+        <img id="detected-spot-image" src="" alt="Hidden Spot Image">
+        <button class="btn btn-upload" onclick="uploadHiddenSpot()">Upload Hidden Spot</button>
+    </div>
+
+    <!-- List of uploaded hidden spots -->
+    <div class="uploaded-list">
+        <h2>📍 Uploaded Hidden Spots</h2>
+        <div id="uploaded-spots"></div>
+    </div>
+
+    <script>
+        const odishaDistricts = {
+            "Cuttack": [
+                { 
+                    name: "Dhabaleswar Island", 
+                    image: "dhabaleswar.webp", 
+                    history: "Dhabaleswar Island is a famous pilgrimage site, known for its ancient Shiva Temple and scenic beauty.", 
+                    location: "20.4858, 85.9570" 
+                },
+                { 
+                    name: "Barabati Fort", 
+                    image: "barabatifort.jpeg", 
+                    history: "Barabati Fort is a 14th-century fort built by the Ganga dynasty, offering a glimpse into Odisha's royal past.", 
+                    location: "20.4877, 85.8177" 
+                },
+                { 
+                    name: "Odisha Maritime Museum", 
+                    image: "Odisha Maritime Museum.avif", 
+                    history: "Visitors to Cuttack should make time to check out the Odisha Maritime Museum. Odisha's rich history and unique customs are highlighted here. You can unearth ancient relics and several historical maritime stories here.", 
+                    location: "20.47888, 85.89641" 
+                },
+                { 
+                    name: "Cuttack Chandi Temple", 
+                    image: "chandi-temple-cuttack.jpg", 
+                    history: "To truly see Cuttack, you must visit the city's oldest and most well-known temple, the Cuttack Chandi Temple. Huge numbers of visitors come to this temple every day of the year. Located on the banks of the Mahanadi River, this temple is home to a statue of Goddess Chandi, whom the locals of Cuttack revere as a living deity.", 
+                    location: "20.4676, 85.8893" 
+                } ,
+
+            ],
+            "Khurda": [
+                { 
+                    name: "Udayagiri Caves", 
+                    image: "https://example.com/udayagiri.jpg", 
+                    history: "Udayagiri Caves are ancient rock-cut caves dating back to the 2nd century BCE, rich in Jain and Buddhist heritage.", 
+                    location: "20.2981, 85.8182" 
+                },
+                { 
+                    name: "Yogini temple", 
+                    image: "yogini tmpl.jpg", 
+                    history: "Yogini temples are Hindu shrines dedicated to the worship of yoginis, or female masters of yoga and manifestations of the mother goddess.", 
+                    location: "20.2734, 85.8516" 
+                },
+                { 
+                    name: "Barunei hill", 
+                    image: "barunei hill.jpg", 
+                    history: "Barunei Hill is a scenic tourist attraction in the Khordha district of Odisha, India", 
+                    location: "20.1582, 85.6215" 
+                },
+                { 
+                    name: "Satkosia Tiger Reserve", 
+                    image: "satkosia_tiger_reserve.jpg", 
+                    history: "Satkosia Tiger Reserve is a tiger reserve located in the border of Angul and Nayagarh district of Odisha, India covering an area of 988.30 km².", 
+                    location: "20°23'40,85°05'24" 
+                }
+               
+            ],
+            "Puri": [
+                { 
+                    name: "Chilika Lake", 
+                    image: "https://example.com/chilika.jpg", 
+                    history: "Chilika Lake is Asia's largest brackish water lagoon, home to rich biodiversity and scenic landscapes.", 
+                    location: "19.7469, 85.3247" 
+                }  
+            ],
+            "Ganjam": [
+                { 
+                    name: "Tara Tarini Temple", 
+                    image: "https://example.com/taratari.jpg", 
+                    history: "One of the oldest pilgrimage sites in Odisha, dedicated to the twin goddess Tara and Tarini.", 
+                    location: "19.5014, 84.8132" 
+                },
+                { 
+                    name: "budhha khola", 
+                    image: "https://www.orissatourism.org/helpers/images/buddhakhol-panchu-mahadev.jpg", 
+                    history: "One of the oldest pilgrimage sites in Odisha, dedicated to the twin goddess Tara and Tarini.", 
+                    location: "19.5014, 84.8132" 
+                },
+            ],
+            "Mayurbhanj": [
+                { 
+                    name: "Simlipal National Park", 
+                    image: "https://example.com/simlipal.jpg", 
+                    history: "A famous tiger reserve, known for its diverse wildlife, scenic waterfalls, and lush greenery.", 
+                    location: "21.9333, 86.4167" 
+                }
+            ]
+        };
+
+        let currentSpot = {};
+
+        function detectNewSpot() {
+            const district = document.getElementById('district-select').value;
+            const spots = odishaDistricts[district];
+            const randomSpot = spots[Math.floor(Math.random() * spots.length)];
+
+            document.getElementById('detected-spot-name').innerText = randomSpot.name;
+            document.getElementById('detected-spot-image').src = randomSpot.image;
+
+            currentSpot = randomSpot;
+        }
+
+        function uploadHiddenSpot() {
+            const uploadedSpotsContainer = document.getElementById('uploaded-spots');
+            const spotCard = document.createElement('div');
+            spotCard.className = 'spot-card';
+
+            spotCard.innerHTML = `
+                <img class="spot-image" src="${currentSpot.image}" alt="${currentSpot.name}">
+                <div class="spot-info">
+                    <p class="spot-name">${currentSpot.name}</p>
+                    <p class="spot-history">${currentSpot.history}</p>
+                    <iframe class="spot-map" src="https://www.google.com/maps?q=${currentSpot.location}&output=embed"></iframe>
+                </div>
+            `;
+
+            uploadedSpotsContainer.appendChild(spotCard);
+        }
+
+        // Load the first spot when the page opens
+        window.onload = detectNewSpot;
+    </script>
+
+</body>
+</html>

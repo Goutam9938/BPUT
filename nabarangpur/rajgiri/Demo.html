@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Map with Search, Distance, and Routing</title>
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    
+    <!-- Leaflet JavaScript -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    
+    <!-- Leaflet Routing Machine CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css" />
+    
+    <!-- Leaflet Routing Machine JavaScript -->
+    <script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
+    
+    <style>
+        #map {
+            height: 500px;
+            width: 100%;
+        }
+        .search-container {
+            margin: 20px;
+        }
+        input[type="text"] {
+            width: 60%;
+            padding: 10px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px;
+            font-size: 16px;
+            margin-left: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Find Nearby Places and Best Route</h1>
+    <div class="search-container">
+        <input type="text" id="searchQuery" placeholder="Enter place type (e.g., hospital, hotel)">
+        <button onclick="performSearch()">Search</button>
+        <button onclick="getUserLocation()">Show Current Location</button>
+    </div>
+    <div id="map"></div>
+
+    <script>
+        const map = L.map('map').setView([20.5937, 78.9629], 5);  // Default view
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        let userLocation = null;
+        let userLocationMarker = null;
+        let routingControl = null;
+
+        function getUserLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    userLocation = [position.coords.latitude, position.coords.longitude];
+
+                    // Center the map on the user's location
+                    map.setView(userLocation, 14);
+
+                    // Add a marker for the user's location, or update the existing marker
+                    if (userLocationMarker) {
+                        userLocationMarker.setLatLng(userLocation);
+                    } else {
+                        userLocationMarker = L.marker(userLocation).addTo(map)
+                            .bindPopup('You are here!')
+                            .openPopup();
+                    }
+                }, function() {
+                    alert('Unable to retrieve your location');
+                });
+            } else {
+                alert('Geolocation is not supported by your browser');
+            }
+        }
+
+        function performSearch() {
+            const query = document.getElementById('searchQuery').value.trim();
+            if (query && userLocation) {
+                searchNearby(query, userLocation);
+            } else {
+                alert('Please enter a place type and ensure location is available');
+            }
+        }
+
+        function searchNearby(query, userLocation) {
+            const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}&limit=10&lat=${userLocation[0]}&lon=${userLocation[1]}&radius=5000`;
+
+            fetch(url)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // Clear previous markers and routing, except user location
+                    map.eachLayer(layer => {
+                        if (layer instanceof L.Marker && layer !== userLocationMarker) {
+                            map.removeLayer(layer);
+                        }
+                    });
+                    if (routingControl) {
+                        map.removeControl(routingControl);
+                    }
+
+                    if (data.length === 0) {
+                        alert('No results found');
+                    } else {
+                        data.forEach(place => {
+                            const placeLocation = [place.lat, place.lon];
+
+                            // Add a marker for each place
+                            const marker = L.marker(placeLocation).addTo(map)
+                                .bindPopup(`<strong>${place.display_name}</strong><br>Distance: ${calculateDistance(userLocation, placeLocation).toFixed(2)} km`)
+                                .openPopup();
+
+                            // When marker is clicked, show route from user location to the place
+                            marker.on('click', function() {
+                                showRoute(userLocation, placeLocation);
+                            });
+                        });
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching nearby places:', error);
+                });
+        }
+
+        function calculateDistance(userLocation, placeLocation) {
+            const userLatLng = L.latLng(userLocation[0], userLocation[1]);
+            const placeLatLng = L.latLng(placeLocation[0], placeLocation[1]);
+            return userLatLng.distanceTo(placeLatLng) / 1000;  // Convert meters to kilometers
+        }
+
+        function showRoute(fromLocation, toLocation) {
+            if (routingControl) {
+                map.removeControl(routingControl);
+            }
+
+            routingControl = L.Routing.control({
+                waypoints: [
+                    L.latLng(fromLocation[0], fromLocation[1]),
+                    L.latLng(toLocation[0], toLocation[1])
+                ],
+                routeWhileDragging: true
+            }).addTo(map);
+        }
+
+        // Initialize map and user location
+        window.onload = getUserLocation;
+    </script>
+</body>
+</html>

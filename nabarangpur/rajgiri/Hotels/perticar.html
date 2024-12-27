@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Hotel Website">
+  <meta name="author" content="Your Name">
+  <title>Hotel Name</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <link rel="stylesheet" href="style3.css">
+  <style>
+    #info-section .card {
+      border: none;
+      background-color: #38833d;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    #info-section .card-title {
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
+
+    #info-section .card-text {
+      font-size: 16px;
+      color: #333;
+    }
+
+    #info-section .btn-link {
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    #info-section .btn-link:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 767px) {
+      #info-section .card {
+        margin-bottom: 20px;
+      }
+    }
+    @media (max-width: 768px) {
+  .hero {
+    height: 50vh; /* Adjust height for mobile */
+    background-size: cover; /* Ensures full coverage on smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    height: 40vh; /* Smaller height for very small screens */
+  }
+}
+
+
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light shadow">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="#">Hotel Name</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#rooms">Rooms</a></li>
+          <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+          <li class="nav-item"><a class="nav-link" href="#booking">Booking</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero d-flex align-items-center text-center" style="height: 60vh; background: url('swasti.jpg') no-repeat center center; background-size: cover;">
+    <div class="container">
+      <h1 class="display-4 fw-bold animate__animated animate__fadeInDown">Welcome to Hotel Name</h1>
+      <p class="lead mt-3">Experience luxury and comfort at its best.</p>
+      <a href="#booking" class="btn btn-primary btn-lg mt-3">Book Now</a>
+    </div>
+  </header>
+
+  <!-- New Section Below Hero -->
+  <section id="info-section" class="py-5 bg-light">
+    <div class="container">
+      <div class="row text-center">
+        <!-- Location -->
+        <div class="col-md-4 mb-4 mb-md-0">
+          <div class="card shadow-sm p-4">
+            <h4 class="card-title">Our Location</h4>
+            <p class="card-text">1234 Hotel Street, City, Country</p>
+            <a href="https://www.google.com/maps" class="btn btn-link" target="_blank">View on Google Maps</a>
+          </div>
+        </div>
+        <!-- Opening Time -->
+        <div class="col-md-4 mb-4 mb-md-0">
+          <div class="card shadow-sm p-4">
+            <h4 class="card-title">Opening Time</h4>
+            <p class="card-text">Mon - Sun: 8:00 AM - 10:00 PM</p>
+          </div>
+        </div>
+        <!-- Customer Support -->
+        <div class="col-md-4">
+          <div class="card shadow-sm p-4">
+            <h4 class="card-title">Customer Support</h4>
+            <p class="card-text">Call us at +123 456 789 or email us at support@hotel.com</p>
+            <a href="mailto:support@hotel.com" class="btn btn-link">Email Us</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="py-5">
+    <div class="container">
+      <h2 class="text-center">About Us</h2>
+      <p class="text-center mt-3">Discover the perfect blend of luxury and comfort at our hotel.</p>
+    </div>
+  </section>
+
+  <!-- Rooms Section -->
+  <section id="rooms" class="py-5 bg-light">
+    <div class="container">
+      <h2 class="text-center">Rooms</h2>
+      <div class="row mt-4">
+        <!-- Room Card -->
+        <div class="col-md-4 mb-4">
+          <div class="card h-100 shadow-sm">
+            <img src="room1.jpg" class="card-img-top" alt="Room Image">
+            <div class="card-body">
+              <h5 class="card-title">Deluxe Room</h5>
+              <p class="card-text">Enjoy a luxurious stay with premium facilities.</p>
+              <p class="text-primary fw-bold">$150/night</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="card h-100 shadow-sm">
+            <img src="room1.jpg" class="card-img-top" alt="Room Image">
+            <div class="card-body">
+              <h5 class="card-title">Deluxe Room</h5>
+              <p class="card-text">Enjoy a luxurious stay with premium facilities.</p>
+              <p class="text-primary fw-bold">$150/night</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="card h-100 shadow-sm">
+            <img src="room1.jpg" class="card-img-top" alt="Room Image">
+            <div class="card-body">
+              <h5 class="card-title">Deluxe Room</h5>
+              <p class="card-text">Enjoy a luxurious stay with premium facilities.</p>
+              <p class="text-primary fw-bold">$150/night</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="card h-100 shadow-sm">
+            <img src="room1.jpg" class="card-img-top" alt="Room Image">
+            <div class="card-body">
+              <h5 class="card-title">Deluxe Room</h5>
+              <p class="card-text">Enjoy a luxurious stay with premium facilities.</p>
+              <p class="text-primary fw-bold">$150/night</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="card h-100 shadow-sm">
+            <img src="room1.jpg" class="card-img-top" alt="Room Image">
+            <div class="card-body">
+              <h5 class="card-title">Deluxe Room</h5>
+              <p class="card-text">Enjoy a luxurious stay with premium facilities.</p>
+              <p class="text-primary fw-bold">$150/night</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="card h-100 shadow-sm">
+            <img src="room1.jpg" class="card-img-top" alt="Room Image">
+            <div class="card-body">
+              <h5 class="card-title">Deluxe Room</h5>
+              <p class="card-text">Enjoy a luxurious stay with premium facilities.</p>
+              <p class="text-primary fw-bold">$150/night</p>
+            </div>
+          </div>
+        </div>
+        <!-- Repeat for other rooms -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Booking Section -->
+  <section id="booking" class="py-5">
+    <div class="container">
+      <h2 class="text-center">Book Your Stay</h2>
+      <form id="bookingForm" class="mt-4">
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <input type="text" class="form-control" placeholder="Your Name" required>
+          </div>
+          <div class="col-md-6 mb-3">
+            <input type="email" class="form-control" placeholder="Your Email" required>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <input type="date" class="form-control" required>
+          </div>
+          <div class="col-md-6 mb-3">
+            <input type="number" class="form-control" placeholder="Number of Guests" required>
+          </div>
+        </div>
+        <!-- Google reCAPTCHA -->
+        <div class="g-recaptcha my-3" data-sitekey="your-site-key-here"></div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-light py-4">
+    <div class="container text-center">
+      <p>&copy; 2024 Hotel Name. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  <script src="script.js"></script>
+</body>
+</html>
